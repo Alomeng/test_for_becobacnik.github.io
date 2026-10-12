@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Интерактивная лаборатория для практики HTTP, JSON, REST API и Python.">
+  <title>HTTP Lab — лаборатория HTTP и API</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="HTTP Lab — главная">
+      <span class="brand-mark">{ }</span><span>HTTP<span class="accent">Lab</span></span>
+    </a>
+    <nav class="topnav" aria-label="Основная навигация">
+      <a href="#learn">Обучение</a><a href="#playground">API-песочница</a><a href="#json">JSON</a><a href="#python">Python</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle" type="button" title="Переключить тему">☼ Тема</button>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="status-dot"></span> ИНТЕРАКТИВНАЯ ЛАБОРАТОРИЯ</div>
+        <h1>Изучай HTTP.<br><span class="gradient-text">Понимай API.</span></h1>
+        <p class="hero-lead">Экспериментируй с запросами, разбирай JSON и учись писать API-клиенты на Python — прямо на практике.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#playground">Открыть песочницу <span>↗</span></a>
+          <a class="button secondary" href="#learn">Начать обучение</a>
+        </div>
+        <div class="hero-meta"><span>● Бесплатно</span><span>⌘ Без регистрации</span><span>⌁ GitHub Pages</span></div>
+      </div>
+      <div class="hero-visual" aria-label="Пример HTTP-ответа">
+        <div class="window-bar"><div class="window-dots"><i></i><i></i><i></i></div><span>request.preview</span><span class="window-status">● Connected</span></div>
+        <div class="code-preview">
+          <div><span class="code-muted">01</span> <span class="code-purple">GET</span> <span class="code-blue">/posts/1</span></div>
+          <div><span class="code-muted">02</span> <span class="code-comment">// отправляем запрос</span></div>
+          <div class="code-gap"></div>
+          <div><span class="code-muted">03</span> <span class="code-comment">// ответ сервера</span></div>
+          <div><span class="code-muted">04</span> <span class="code-pink">{</span></div>
+          <div><span class="code-muted">05</span> &nbsp;&nbsp;<span class="code-green">"userId"</span>: <span class="code-orange">1</span>,</div>
+          <div><span class="code-muted">06</span> &nbsp;&nbsp;<span class="code-green">"id"</span>: <span class="code-orange">1</span>,</div>
+          <div><span class="code-muted">07</span> &nbsp;&nbsp;<span class="code-green">"title"</span>: <span class="code-yellow">"hello api"</span>,</div>
+          <div><span class="code-muted">08</span> &nbsp;&nbsp;<span class="code-green">"body"</span>: <span class="code-yellow">"JSON in action"</span></div>
+          <div><span class="code-muted">09</span> <span class="code-pink">}</span></div>
+        </div>
+        <div class="response-pill"><span class="pill-check">✓</span><span><strong>200 OK</strong><small>JSON · 4 поля</small></span><span class="pill-time">~120 ms*</span></div>
+      </div>
+    </section>
+
+    <section class="stats-row" aria-label="Возможности">
+      <div><strong>01</strong><span>HTTP-запросы</span></div><div><strong>02</strong><span>JSON-данные</span></div><div><strong>03</strong><span>REST API</span></div><div><strong>04</strong><span>Python-практика</span></div>
+    </section>
+
+    <section class="section" id="learn">
+      <div class="section-heading"><div><div class="eyebrow">ТВОЙ МАРШРУТ</div><h2>Учись через эксперименты</h2></div><p>Выбирай тему, изучай короткое объяснение и сразу пробуй сам.</p></div>
+      <div class="learning-grid">
+        <article class="topic-card"><div class="topic-icon violet">↔</div><div class="topic-kicker">УРОК 01</div><h3>HTTP и методы</h3><p>Как клиент общается с сервером, что означают GET, POST, PUT, PATCH и DELETE.</p><a href="#http-guide">Изучить тему <span>→</span></a></article>
+        <article class="topic-card"><div class="topic-icon green">{ }</div><div class="topic-kicker">УРОК 02</div><h3>Структура JSON</h3><p>Объекты, массивы, типы данных, вложенные значения и проверка синтаксиса.</p><a href="#json">Открыть JSON-инструмент <span>→</span></a></article>
+        <article class="topic-card"><div class="topic-icon orange">⌁</div><div class="topic-kicker">УРОК 03</div><h3>REST API</h3><p>Работа с ресурсами, параметрами URL, заголовками и ответами сервера.</p><a href="#playground">Отправить запрос <span>→</span></a></article>
+      </div>
+    </section>
+
+    <section class="section guide-section" id="http-guide">
+      <div class="section-heading"><div><div class="eyebrow">КРАТКИЙ СПРАВОЧНИК</div><h2>Основы HTTP</h2></div><p>HTTP-запрос состоит из метода, адреса, заголовков и, иногда, тела.</p></div>
+      <div class="method-list">
+        <div class="method-row"><span class="method get">GET</span><div><strong>Получить данные</strong><small>Например, прочитать публикацию или список пользователей.</small></div><code>GET /posts/1</code></div>
+        <div class="method-row"><span class="method post">POST</span><div><strong>Создать ресурс / отправить данные</strong><small>Обычно передаёт данные в теле запроса.</small></div><code>POST /posts</code></div>
+        <div class="method-row"><span class="method put">PUT</span><div><strong>Заменить ресурс</strong><small>Часто заменяет представление ресурса целиком.</small></div><code>PUT /posts/1</code></div>
+        <div class="method-row"><span class="method patch">PATCH</span><div><strong>Частично изменить ресурс</strong><small>Передаёт только изменяемые поля.</small></div><code>PATCH /posts/1</code></div>
+        <div class="method-row"><span class="method delete">DELETE</span><div><strong>Удалить ресурс</strong><small>Удаляет ресурс, если API поддерживает эту операцию.</small></div><code>DELETE /posts/1</code></div>
+      </div>
+      <div class="note"><span>ⓘ</span><p><strong>Важно:</strong> HTTP-метод сам по себе не гарантирует действие. Реальное поведение зависит от конкретного API. JSONPlaceholder — учебный сервис: изменения имитируются и не сохраняются как в настоящей базе данных.</p></div>
+    </section>
+
+    <section class="section playground-section" id="playground">
+      <div class="section-heading"><div><div class="eyebrow">ПРОБУЙ САМ</div><h2>API-песочница</h2></div><p>Отправляй запросы к публичному тестовому API и изучай ответ сервера.</p></div>
+      <div class="lab-layout">
+        <div class="request-panel panel">
+          <div class="panel-title"><span class="panel-dot"></span> ЗАПРОС <span class="panel-subtitle">REQUEST</span></div>
+          <label for="methodSelect">HTTP-метод</label>
+          <select id="methodSelect"><option>GET</option><option>POST</option><option>PUT</option><option>PATCH</option><option>DELETE</option></select>
+          <label for="urlInput">URL</label>
+          <input id="urlInput" type="url" value="https://jsonplaceholder.typicode.com/posts/1" spellcheck="false">
+          <div class="quick-urls"><button type="button" data-url="https://jsonplaceholder.typicode.com/posts/1">Публикация</button><button type="button" data-url="https://jsonplaceholder.typicode.com/users/1">Пользователь</button><button type="button" data-url="https://httpbin.org/get">HTTPBin</button></div>
+          <label for="headersInput">Заголовки (JSON)</label>
+          <textarea id="headersInput" rows="3" spellcheck="false">{
+  "Accept": "application/json"
+}</textarea>
+          <label for="bodyInput">Тело запроса (JSON)</label>
+          <textarea id="bodyInput" rows="5" spellcheck="false">{
+  "title": "Моя публикация",
+  "body": "Проверка POST-запроса",
+  "userId": 1
+}</textarea>
+          <div class="request-footer"><span id="bodyHint">Используется для POST, PUT и PATCH</span><button id="sendRequest" class="button primary" type="button"><span>▶</span> Отправить</button></div>
+          <p class="small-warning">Не вводи пароли, токены или другие секреты: запросы идут к внешним сервисам.</p>
+        </div>
+        <div class="response-panel panel">
+          <div class="panel-title"><span class="panel-dot response-dot"></span> ОТВЕТ <span class="panel-subtitle">RESPONSE</span><button class="icon-button" id="copyResponse" type="button" title="Копировать ответ">Копировать</button></div>
+          <div class="response-metrics"><div><small>СТАТУС</small><strong id="responseStatus">—</strong></div><div><small>ВРЕМЯ</small><strong id="responseTime">—</strong></div><div><small>РАЗМЕР</small><strong id="responseSize">—</strong></div></div>
+          <div class="response-tabs"><button class="active" type="button" data-tab="body">Тело ответа</button><button type="button" data-tab="headers">Заголовки</button></div>
+          <pre class="response-output" id="responseOutput" tabindex="0"><span class="output-muted">Ответ сервера появится здесь после отправки запроса.</span></pre>
+          <div class="response-bottom" id="responseMessage">Готов к отправке</div>
+        </div>
+      </div>
+      <div class="note"><span>ⓘ</span><p>Если запрос не отправляется, возможна ошибка CORS: сервер не разрешает браузерам с этого сайта читать ответ. Это ограничение политики браузера, а не обязательно ошибка твоего запроса. Попробуй другой URL или выполни запрос через Python.</p></div>
+    </section>
+
+    <section class="section json-section" id="json">
+      <div class="section-heading"><div><div class="eyebrow">РАБОТА С ДАННЫМИ</div><h2>JSON-конструктор</h2></div><p>Вставь JSON, проверь его корректность и отформатируй.</p></div>
+      <div class="json-layout panel">
+        <div class="json-editor">
+          <div class="panel-title">ВХОДНЫЕ ДАННЫЕ <span class="panel-subtitle">INPUT</span></div>
+          <textarea id="jsonInput" rows="14" spellcheck="false">{
+  "name": "Alex",
+  "active": true,
+  "skills": ["Python", "HTTP", "JSON"],
+  "profile": {
+    "level": "beginner",
+    "projects": 3
+  }
+}</textarea>
+          <div class="json-actions"><button class="button primary" id="formatJson" type="button">Проверить и форматировать</button><button class="button secondary" id="minifyJson" type="button">Минифицировать</button></div>
+          <div class="json-status" id="jsonStatus" role="status">Ожидает проверки</div>
+        </div>
+        <div class="json-result">
+          <div class="panel-title">СТРУКТУРА <span class="panel-subtitle">OVERVIEW</span></div>
+          <div class="json-summary" id="jsonSummary"><div class="empty-state">Проверь JSON, чтобы увидеть сводку.</div></div>
+          <div class="json-tip"><strong>Запомни:</strong> JSON поддерживает строки, числа, true/false, null, массивы и объекты. Ключи и строки заключаются в двойные кавычки; комментарии не поддерживаются.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section python-section" id="python">
+      <div class="section-heading"><div><div class="eyebrow">КОД В ДЕЙСТВИИ</div><h2>Практикум Python</h2></div><p>Скрипт запускается на твоём компьютере. Сайт помогает изучать его шаг за шагом.</p></div>
+      <div class="python-card panel">
+        <div class="python-card-head"><div><span class="python-label">PYTHON 3</span><h3>Твой первый API-клиент</h3><p>Получает публикацию, проверяет статус и сохраняет JSON в файл.</p></div><a class="button secondary" href="python/main.py" download>Скачать main.py ↓</a></div>
+        <div class="code-block"><div class="code-toolbar"><span>python/main.py</span><button id="copyPython" type="button">Копировать код</button></div><pre><code>import json
+import requests
+
+url = "https://jsonplaceholder.typicode.com/posts/1"
+
+try:
+    response = requests.get(url, timeout=10)
+    print("HTTP status:", response.status_code)
+    response.raise_for_status()
+
+    post = response.json()
+    print("Title:", post["title"])
+
+    with open("response.json", "w", encoding="utf-8") as file:
+        json.dump(post, file, ensure_ascii=False, indent=2)
+
+    print("Ответ сохранён в response.json")
+
+except requests.exceptions.RequestException as error:
+    print("Ошибка запроса:", error)
+except (ValueError, KeyError) as error:
+    print("Ошибка данных:", error)</code></pre></div>
+        <div class="python-steps"><div><span>01</span><p><strong>Установи зависимость</strong><code>python -m pip install requests</code></p><button class="copy-command" data-copy="python -m pip install requests" type="button">Копировать</button></div><div><span>02</span><p><strong>Запусти скрипт</strong><code>python main.py</code></p><button class="copy-command" data-copy="python main.py" type="button">Копировать</button></div><div><span>03</span><p><strong>Изучи ответ</strong><small>Посмотри статус, поле title и созданный response.json.</small></p></div></div>
+      </div>
+      <div class="exercise-list">
+        <h3>Задания для самостоятельной практики</h3>
+        <details><summary>Задание 1. Получи другого пользователя</summary><p>Измени URL на <code>https://jsonplaceholder.typicode.com/users/2</code>. Выведи имя, email и город пользователя.</p></details>
+        <details><summary>Задание 2. Обработай 404</summary><p>Запроси <code>https://jsonplaceholder.typicode.com/posts/999999</code>. Обрати внимание: некоторые API возвращают пустой объект или массив со статусом 200, поэтому проверяй и статус, и содержимое ответа.</p></details>
+        <details><summary>Задание 3. Отправь POST</summary><p>Используй <code>requests.post(url, json=payload, timeout=10)</code> для адреса <code>https://jsonplaceholder.typicode.com/posts</code>. Передай поля <code>title</code>, <code>body</code> и <code>userId</code>.</p></details>
+        <details><summary>Задание 4. Добавь параметры запроса</summary><p>Отправь GET на <code>https://jsonplaceholder.typicode.com/posts</code> с параметром <code>userId=1</code>, используя <code>params={"userId": 1}</code>.</p></details>
+      </div>
+    </section>
+
+    <section class="section status-section">
+      <div class="section-heading"><div><div class="eyebrow">ШПАРГАЛКА</div><h2>Частые статус-коды</h2></div><p>Первое число указывает на класс результата.</p></div>
+      <div class="status-grid">
+        <div><span class="status-number success">200</span><strong>OK</strong><p>Запрос успешно выполнен.</p></div>
+        <div><span class="status-number success">201</span><strong>Created</strong><p>Ресурс создан.</p></div>
+        <div><span class="status-number info">204</span><strong>No Content</strong><p>Успех без тела ответа.</p></div>
+        <div><span class="status-number warning">400</span><strong>Bad Request</strong><p>Некорректный запрос.</p></div>
+        <div><span class="status-number warning">401 / 403</span><strong>Unauthorized / Forbidden</strong><p>Нет аутентификации или доступа.</p></div>
+        <div><span class="status-number warning">404</span><strong>Not Found</strong><p>Ресурс не найден.</p></div>
+        <div><span class="status-number error">429</span><strong>Too Many Requests</strong><p>Слишком много запросов.</p></div>
+        <div><span class="status-number error">500</span><strong>Server Error</strong><p>Внутренняя ошибка сервера.</p></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer"><a class="brand" href="#home"><span class="brand-mark">{ }</span><span>HTTP<span class="accent">Lab</span></span></a><p>Учись на запросах. Проверяй ответы. Пиши код.</p><div><a href="https://github.com/" target="_blank" rel="noopener noreferrer">GitHub</a><a href="https://jsonplaceholder.typicode.com/" target="_blank" rel="noopener noreferrer">JSONPlaceholder</a></div></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
