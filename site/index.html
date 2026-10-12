@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HTTP API Lab — Postman practice</title><link rel="stylesheet" href="style.css"><script defer src="script.js"></script></head>
+<body><header><a class="logo" href="#">HTTP<span>API</span>Lab</a><nav><a href="#start">Старт</a><a href="#routes">Эндпоинты</a><a href="#tasks">Задания</a><a href="#publish">Публикация</a></nav></header>
+<main><section class="hero"><div><small>REST API TRAINING LAB</small><h1>Практикуй HTTP.<br><em>Отправляй реальные запросы.</em></h1><p>Учебный API для Postman, curl, Python requests и PowerShell. Сайт — справочник на GitHub Pages, сервер API разворачивается отдельно.</p><a class="btn" href="#start">Начать практику ↓</a></div><pre><span>GET</span> /api/v1/posts/1
+
+HTTP/1.1 200 OK
+content-type: application/json
+
+{
+  "id": 1,
+  "title": "Изучаем HTTP",
+  "body": "Первый запрос к API.",
+  "userId": 1
+}</pre></section>
+<section id="start" class="panel"><small>01 / QUICK START</small><h2>Подключи свой API URL</h2><p>После деплоя на Render вставь сюда базовый адрес сервера.</p><div class="url"><input id="base" placeholder="https://your-api.onrender.com"><button id="save">Сохранить</button></div><p id="hint">Пока сервер не развёрнут, публичного URL ещё нет.</p><div class="route"><b class="get">GET</b><code id="health">https://your-api.onrender.com/health</code><button data-copy="health">Копировать</button></div><div class="route"><b class="get">GET</b><code id="posts">https://your-api.onrender.com/api/v1/posts</code><button data-copy="posts">Копировать</button></div><p class="note">GitHub Pages не исполняет Python. Этот справочник публикуется на Pages, а FastAPI-сервер нужно развернуть отдельно.</p></section>
+<section id="routes"><small>02 / ENDPOINT REFERENCE</small><h2>Эндпоинты</h2><p>Копируй путь и добавляй его к базовому URL в Postman.</p><div class="filters"><button class="active" data-filter="all">Все</button><button data-filter="GET">GET</button><button data-filter="POST">POST</button><button data-filter="PUT">PUT</button><button data-filter="PATCH">PATCH</button><button data-filter="DELETE">DELETE</button></div><div class="routes">
+<div class="route" data-method="GET"><b class="get">GET</b><code>/health</code><span>Проверить сервер</span></div>
+<div class="route" data-method="GET"><b class="get">GET</b><code>/api/v1/posts</code><span>Список, фильтры, пагинация</span></div>
+<div class="route" data-method="GET"><b class="get">GET</b><code>/api/v1/posts/1</code><span>Получить публикацию</span></div>
+<div class="route" data-method="POST"><b class="post">POST</b><code>/api/v1/posts</code><span>Создать JSON-ресурс</span></div>
+<div class="route" data-method="PUT"><b class="put">PUT</b><code>/api/v1/posts/1</code><span>Полностью заменить ресурс</span></div>
+<div class="route" data-method="PATCH"><b class="patch">PATCH</b><code>/api/v1/posts/1</code><span>Частично изменить ресурс</span></div>
+<div class="route" data-method="DELETE"><b class="delete">DELETE</b><code>/api/v1/posts/1</code><span>Удалить ресурс (204)</span></div>
+<div class="route" data-method="GET"><b class="get">GET</b><code>/api/v1/users</code><span>Список пользователей</span></div>
+<div class="route" data-method="GET"><b class="get">GET</b><code>/api/v1/users/1</code><span>Пользователь по ID</span></div>
+<div class="route" data-method="GET"><b class="get">GET</b><code>/api/v1/secure/profile</code><span>Заголовок X-API-Key</span></div>
+<div class="route" data-method="GET"><b class="get">GET</b><code>/api/v1/status/418</code><span>Практика статус-кодов</span></div>
+</div><div class="twocol"><article class="panel"><h3>JSON для POST / PUT</h3><pre>{
+  "title": "Моя публикация",
+  "body": "Отправлено через Postman",
+  "userId": 1
+}</pre><p>Добавь заголовок <code>Content-Type: application/json</code>.</p></article><article class="panel"><h3>Query-параметры</h3><pre>/api/v1/posts?userId=2&limit=3&offset=0
+/api/v1/posts?q=HTTP</pre><p>Параметры запроса помогают фильтровать и разбивать результаты на страницы.</p></article></div></section>
+<section id="tasks"><small>03 / PRACTICE</small><h2>Практические задания</h2><div class="tasks">
+<details open><summary>01. Первый GET-запрос · Начальный</summary><p>Получи список публикаций, затем запроси публикацию с ID 3. Сравни статус, заголовки и JSON.</p></details>
+<details><summary>02. Query-параметры · Начальный</summary><p>Получи публикации пользователя 2, максимум 3 результата, пропусти первые два: <code>?userId=2&limit=3&offset=2</code>.</p></details>
+<details><summary>03. Создание через POST · Начальный</summary><p>Отправь JSON с title, body, userId. Ожидаемый статус — 201 Created. Попробуй убрать обязательное поле.</p></details>
+<details><summary>04. PUT против PATCH · Средний</summary><p>Обнови только title через PATCH. Затем используй PUT с полным объектом и сравни ответы.</p></details>
+<details><summary>05. Ошибки · Средний</summary><p>Запроси неизвестный ID (404), отправь POST без title (422), проверь невалидные query-параметры.</p></details>
+<details><summary>06. DELETE · Средний</summary><p>Удали публикацию, затем запроси её снова. DELETE возвращает 204 без тела.</p></details>
+<details><summary>07. API key · Продвинутый</summary><p>Запроси /api/v1/secure/profile без заголовка X-API-Key (401), затем с X-API-Key: lab-demo-key (200).</p></details>
+<details><summary>08. Python requests · Продвинутый</summary><p>Используй requests.get, params, timeout, raise_for_status() и обработку RequestException.</p></details></div></section>
+<section id="publish"><small>04 / DEPLOYMENT</small><h2>Как опубликовать проект</h2><div class="twocol"><article class="panel"><h3>1. API на Render</h3><p>Создай Web Service из репозитория. Root Directory: <code>api</code>. Build Command: <code>pip install -r requirements.txt</code>. Start Command:</p><pre>uvicorn main:app --host 0.0.0.0 --port $PORT</pre><p>Выбери бесплатный instance и дождись URL. Первый запрос после простоя может быть медленным.</p><a href="https://render.com/" target="_blank" rel="noopener">Открыть Render ↗</a></article><article class="panel"><h3>2. Сайт на GitHub Pages</h3><p>Создай отдельный репозиторий для сайта и загрузи содержимое папки <code>site</code> в корень. Включи Settings → Pages → Deploy from a branch → main → /(root).</p><p>Потом вставь URL Render в поле выше.</p><a href="https://pages.github.com/" target="_blank" rel="noopener">GitHub Pages ↗</a></article></div><p class="note">Данные хранятся в памяти сервера и могут сбрасываться после перезапуска или холодного старта. Демонстрационный ключ публичный — не используй настоящие секреты.</p></section>
+<section><small>05 / PYTHON</small><h2>Тот же API через Python</h2><article class="panel"><pre>import requests
+
+BASE_URL = "http://127.0.0.1:8000"  # или URL Render
+response = requests.get(
+    f"{BASE_URL}/api/v1/posts",
+    params={"userId": 1, "limit": 5},
+    timeout=10,
+)
+print(response.status_code)
+response.raise_for_status()
+for post in response.json()["items"]:
+    print(post["id"], post["title"])</pre><p>Установка: <code>python -m pip install requests</code>. Подробности — в <code>api/client.py</code>.</p></article></section>
+</main><footer>HTTP API Lab · Учебный REST API для Postman и Python</footer><div id="toast"></div></body></html>
